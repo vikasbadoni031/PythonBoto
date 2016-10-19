@@ -9,4 +9,10 @@ class Connection:
 		print "Getting the ec2 connection"
 		conn = boto.ec2.connect_to_region(self.region)
 		return conn
-		
+
+	def s3Connection(self):
+		print "Getting the s3 connection"
+		conn = boto.connect_s3()
+		return conn
+
+	

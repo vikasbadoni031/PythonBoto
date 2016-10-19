@@ -19,3 +19,27 @@ class Volumes:
 				print "Instance Id :", attachementData.instance_id
 				print "attachment time :", attachementData.attach_time
 				print "attachment device :", attachementData.device
+				print "\n Next volume \n"
+
+	def attach_volume(self,conn,volume_id,instance_id):
+		print "atttaching volume function"
+
+		vols=conn.get_all_volumes(volume_id)
+
+		print "printing volume info",vols
+
+		if vols:
+
+			volume=vols[0]
+
+			if(volume.status== 'available'):
+				isattached=volume.attach(instance_id,'/dev/xvdf')
+
+				if isattached:
+					print "Volume", volume_id,"attached successfully to the instance :",instance_id
+				else:
+					print "error attaching volume", volume_id, "to instance", instance_id
+
+			else:
+				print "Volume is in-use"
+
